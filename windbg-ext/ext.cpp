@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <DbgEng.h>
 #include "ext.h"
+#include "callbacks.h"
 
 HRESULT DebugExtensionInitialize(
 	_Out_  PULONG Version,
@@ -27,9 +28,12 @@ HRESULT CALLBACK pyscript(
 	_In_      PDEBUG_CLIENT Client,
 	_In_opt_  PCSTR Args)
 {
+	PybagCallbacks *callbacks = NULL;
+	
+	callbacks = new PybagCallbacks(Client, Args);
+    
+    Client->SetEventCallbacks(callbacks);
+
 	return S_OK;
 }
-
-
-
 

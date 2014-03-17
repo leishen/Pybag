@@ -10,6 +10,8 @@ link_directories(${PYTHON_PATH}/libs)
 list(APPEND source_files 
                 ext.cpp
                 ext.h
+				callbacks.cpp
+				callbacks.h
 )
         
 set(libs dbgeng.lib)
