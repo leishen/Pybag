@@ -160,7 +160,7 @@ static PyMethodDef PyDebugAdvanced_methods[] = {
 
 PyTypeObject PyDebugAdvancedType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+    //0,                         /*ob_size, removed in Python 3*/
     "pydbgeng.DebugAdvanced",  /*tp_name*/
     sizeof(PyDebugAdvancedObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/

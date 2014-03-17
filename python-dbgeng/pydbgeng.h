@@ -5,6 +5,7 @@
 #include <dbgeng.h>
 #include <Python.h>
 #include <structmember.h>
+#include "config.h"
 #include "constants.h"
 #include "exceptions.h"
 #include "eventcallbacks.h"

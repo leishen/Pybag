@@ -1921,7 +1921,9 @@ static PyMethodDef PyDebugSymbols_methods[] = {
 
 PyTypeObject PyDebugSymbolsType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugSymbols",   /*tp_name*/
     sizeof(PyDebugSymbolsObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/

@@ -259,7 +259,7 @@ dbgsys_GetProcessIdsByIndex(PyDebugSystemsObjectsObject *self)
         PyObject *tmp = NULL;
         int status;
 
-        tmp = PyInt_FromLong(Ids[i]);
+		tmp = PyInt_FromLong(Ids[i]);
         if (tmp == NULL)
             goto done;
 
@@ -274,7 +274,7 @@ dbgsys_GetProcessIdsByIndex(PyDebugSystemsObjectsObject *self)
         PyObject *tmp = NULL;
         int status;
 
-        tmp = PyInt_FromLong(SysIds[i]);
+		tmp = PyInt_FromLong(SysIds[i]);
         if (tmp == NULL)
             goto done;
 
@@ -496,7 +496,7 @@ dbgsys_GetThreadIdsByIndex(PyDebugSystemsObjectsObject *self)
         PyObject *tmp = NULL;
         int status;
 
-        tmp = PyInt_FromLong(Ids[i]);
+		tmp = PyInt_FromLong(Ids[i]);
         if (tmp == NULL)
             goto done;
 
@@ -511,7 +511,7 @@ dbgsys_GetThreadIdsByIndex(PyDebugSystemsObjectsObject *self)
         PyObject *tmp = NULL;
         int status;
 
-        tmp = PyInt_FromLong(SysIds[i]);
+		tmp = PyInt_FromLong(SysIds[i]);
         if (tmp == NULL)
             goto done;
 
@@ -926,7 +926,9 @@ static PyMethodDef PyDebugSystemsObject_methods[] = {
 
 PyTypeObject PyDebugSystemsObjectsType = {
     PyObject_HEAD_INIT(NULL)
+#ifndef IS_PY3K
     0,                         /*ob_size*/
+#endif
     "pydbgeng.DebugSystemsObject", /*tp_name*/
     sizeof(PyDebugSystemsObjectsObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/

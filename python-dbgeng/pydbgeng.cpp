@@ -152,10 +152,29 @@ static void AddTypes(PyObject *m)
     }
 }
 
+#ifdef IS_PY3K
+	static struct PyModuleDef moduledef = {
+		PyModuleDef_HEAD_INIT,
+		"pydbgeng",     /* m_name */
+		"Python interface to the Windbg engine",  /* m_doc */
+		-1,                  /* m_size */
+		PyDbgEngMethods,     /* m_methods */
+		NULL,                /* m_reload */
+		NULL,                /* m_traverse */
+		NULL,                /* m_clear */
+		NULL,                /* m_free */
+	};
+#endif
+
 PyMODINIT_FUNC initpydbgeng(void)
 {
     PyObject *m;
-    m = Py_InitModule("pydbgeng", PyDbgEngMethods);
+
+#if PY_MAJOR_VERSION >= 3
+	m = PyModule_Create(&moduledef);
+#else
+	m = Py_InitModule("pydbgeng", PyDbgEngMethods);
+#endif
     if (m == NULL)
         goto error;
 
@@ -163,8 +182,11 @@ PyMODINIT_FUNC initpydbgeng(void)
     AddExceptions(m);
     AddTypes(m);
 
+	return m;
+
 error:
     if (PyErr_Occurred())
         PyErr_SetString(PyExc_ImportError, "pydbgeng: init failed");
+	return NULL;
 }
 

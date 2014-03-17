@@ -978,7 +978,7 @@ dbgclient_GetRunningProcessSystemIds(PyDebugClientObject *self)
         PyObject *tmp = NULL;
         int status;
 
-        tmp = PyInt_FromLong(ids[count]);
+		tmp = PyInt_FromLong(ids[count]);
         if (tmp == NULL)
             goto error;
 
@@ -1537,8 +1537,10 @@ static PyMethodDef PyDebugClient_methods[] = {
 
 PyTypeObject PyDebugClientType = {
     PyObject_HEAD_INIT(NULL)
+#ifndef IS_PY3K
     0,                         /*ob_size*/
-    "pydbgeng.DebugClient",    /*tp_name*/
+#endif
+	"pydbgeng.DebugClient",    /*tp_name*/
     sizeof(PyDebugClientObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
     (destructor)dbgclient_dealloc, /*tp_dealloc*/

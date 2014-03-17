@@ -1,3 +1,4 @@
+#include "pydbgeng.h"
 #include "winstructs.h"
 
 static int 
@@ -85,7 +86,9 @@ static PyMethodDef PyDebugSymbolEntryObject_methods[] = {
 
 PyTypeObject PyDebugSymbolEntryType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugSymbolEntry", /*tp_name*/
     sizeof(PyDebugSymbolEntryObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -185,7 +188,9 @@ static PyMethodDef PyDebugRegisterDescriptionObject_methods[] = {
 
 PyTypeObject PyDebugRegisterDescriptionType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugRegiseterDescription", /*tp_name*/
     sizeof(PyDebugRegisterDescriptionObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -312,7 +317,9 @@ static PyMethodDef PyDebugStackFrameObject_methods[] = {
 
 PyTypeObject PyDebugStackFrameType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugStackFrame", /*tp_name*/
     sizeof(PyDebugStackFrameObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -438,7 +445,9 @@ static PyMethodDef PyDebugModuleParametersObject_methods[] = {
 
 PyTypeObject PyDebugModuleParametersType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugModuleParameters", /*tp_name*/
     sizeof(PyDebugModuleParametersObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -568,7 +577,9 @@ static PyMethodDef PyDebugBreakPointParametersObject_methods[] = {
 
 PyTypeObject PyDebugBreakPointParametersType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.BreakPointParameters", /*tp_name*/
     sizeof(PyDebugBreakPointParametersObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -643,7 +654,9 @@ static PyMethodDef PyDebugModuleAndIdObject_methods[] = {
 
 PyTypeObject PyDebugModuleAndIdType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugModuleAndId", /*tp_name*/
     sizeof(PyDebugModuleAndIdObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -750,7 +763,9 @@ static PyMethodDef PyExceptionRecordObject_methods[] = {
 
 PyTypeObject PyExceptionRecordType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.ExceptionRecord", /*tp_name*/
     sizeof(PyExceptionRecordObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -950,7 +965,9 @@ static PyMethodDef PyContext64Object_methods[] = {
 
 PyTypeObject PyContext64Type = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.Context64",      /*tp_name*/
     sizeof(PyContext64Object), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -1113,7 +1130,9 @@ static PyMethodDef PyContext32Object_methods[] = {
 
 PyTypeObject PyContext32Type = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.Context32",      /*tp_name*/
     sizeof(PyContext32Object), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -1197,7 +1216,9 @@ static PyMethodDef PyCreateProcessOptionsObject_methods[] = {
 
 PyTypeObject PyCreateProcessOptionsType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugCreateProcessOptions",      /*tp_name*/
     sizeof(PyCreateProcessOptionsObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -1299,7 +1320,9 @@ static PyMethodDef PyExceptionFilterParametersObject_methods[] = {
 
 PyTypeObject PyExceptionFilterParametersType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugExceptionFilterParameters",      /*tp_name*/
     sizeof(PyExceptionFilterParametersObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -1400,7 +1423,9 @@ static PyMethodDef PyHandleDataBasicObject_methods[] = {
 
 PyTypeObject PyHandleDataBasicType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugHandleDataBasic",      /*tp_name*/
     sizeof(PyHandleDataBasicObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -1497,7 +1522,9 @@ static PyMethodDef PySpecificFilterParametersObject_methods[] = {
 
 PyTypeObject PySpecificFilterParametersType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugSpecificFilterparameters",      /*tp_name*/
     sizeof(PySpecificFilterParametersObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -1593,7 +1620,9 @@ static PyMethodDef PySymbolParametersObject_methods[] = {
 
 PyTypeObject PySymbolParametersType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugSymbolParameters",      /*tp_name*/
     sizeof(PySymbolParametersObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
@@ -1715,8 +1744,10 @@ static PyMethodDef PySymbolSourceEntryObject_methods[] = {
 
 PyTypeObject PySymbolSourceEntryType = {
     PyObject_HEAD_INIT(NULL)
+#ifndef IS_PY3K
     0,                         /*ob_size*/
-    "pydbgeng.DebugSymbolSourceEntry",      /*tp_name*/
+#endif
+	"pydbgeng.DebugSymbolSourceEntry",      /*tp_name*/
     sizeof(PySymbolSourceEntryObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
     0,                         /*tp_dealloc*/
@@ -1838,8 +1869,10 @@ static PyMethodDef PyThreadBasicInformationObject_methods[] = {
 
 PyTypeObject PyThreadBasicInformationType = {
     PyObject_HEAD_INIT(NULL)
+#ifndef IS_PY3K
     0,                         /*ob_size*/
-    "pydbgeng.DebugThreadBasicInformation",      /*tp_name*/
+#endif
+	"pydbgeng.DebugThreadBasicInformation",      /*tp_name*/
     sizeof(PyThreadBasicInformationObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
     0,                         /*tp_dealloc*/

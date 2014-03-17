@@ -509,7 +509,9 @@ static PyMethodDef PyDebugBreakpoint_methods[] = {
 
 PyTypeObject PyDebugBreakpointType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+    0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugBreakpoint",/*tp_name*/
     sizeof(PyDebugBreakpointObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/

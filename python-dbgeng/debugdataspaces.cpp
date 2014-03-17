@@ -1047,7 +1047,9 @@ static PyMethodDef PyDebugDataSpaces_methods[] = {
 
 PyTypeObject PyDebugDataSpacesType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugDataSpaces", /*tp_name*/
     sizeof(PyDebugDataSpacesObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/

@@ -29,6 +29,7 @@ list(APPEND source_files
                 pydbgeng.h
                 winstructs.cpp
                 winstructs.h
+				config.h
 )
         
 set(libs dbgeng.lib)

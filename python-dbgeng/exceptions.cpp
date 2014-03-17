@@ -1,3 +1,4 @@
+#include "config.h"
 #include "exceptions.h"
 
 PyObject *
@@ -194,8 +195,12 @@ void print_dict(PyObject *d)
     printf("Size : %d\n", size);
     for (i = 0; i < size; i++) {
         PyObject *item = PyList_GET_ITEM(k, i);
+#ifndef IS_PY3K
         printf("-- %s -- \n", PyString_AsString(item));
-    }
+#else
+		printf("-- %s -- \n", PyUnicode_AsUTF8String(item));
+#endif
+	}
 
 
 }

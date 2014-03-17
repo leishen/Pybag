@@ -475,7 +475,9 @@ static PyMethodDef PyDebugSymbolGroup_methods[] = {
 
 PyTypeObject PyDebugSymbolGroupType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugSymbolGroup", /*tp_name*/
     sizeof(PyDebugSymbolGroupObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/

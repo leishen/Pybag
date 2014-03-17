@@ -420,7 +420,9 @@ static PyMethodDef PyDebugRegisters_methods[] = {
 
 PyTypeObject PyDebugRegistersType = {
     PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
+#ifndef IS_PY3K
+	0,                         /*ob_size, removed in Python 3*/
+#endif
     "pydbgeng.DebugRegisters", /*tp_name*/
     sizeof(PyDebugRegistersObject), /*tp_basicsize*/
     0,                         /*tp_itemsize*/
