@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from distutils.core import setup, Extension
 import platform
 import os
@@ -5,7 +6,10 @@ import os
 
 arch = platform.architecture()[0]
 
-SDK_DIR = r'C:\Program Files\Debugging Tools for Windows (x64)\sdk'
+if 'VS100COMNTOOLS' not in os.environ:
+    os.environ['VS100COMNTOOLS'] = os.environ.get('VS120COMNTOOLS', None)
+
+SDK_DIR = r'C:\Program Files (x86)\Windows Kits\8.0\Debuggers'
 INC_DIR = os.path.join(SDK_DIR, 'inc')
 if arch == '64bit':
     LIB_DIR = os.path.join(SDK_DIR, 'lib', 'amd64')

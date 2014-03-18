@@ -1,6 +1,6 @@
 project(python-dbgeng)
 
-set(TARGET_NAME python-dbgeng)
+set(TARGET_NAME pydbgeng)
 
 include_directories(${DBGSDK}/inc)
 include_directories(${PYTHON_PATH}/include)

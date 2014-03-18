@@ -4,6 +4,7 @@
  */
 
 #include "pydbgeng.h"
+#include "config.h"
 
 static PyObject *
 pydbgeng_DebugConnect(PyObject *self, PyObject *args)
@@ -166,15 +167,13 @@ static void AddTypes(PyObject *m)
 	};
 #endif
 
+#ifndef IS_PY3K
+
 PyMODINIT_FUNC initpydbgeng(void)
 {
     PyObject *m;
 
-#if PY_MAJOR_VERSION >= 3
-	m = PyModule_Create(&moduledef);
-#else
 	m = Py_InitModule("pydbgeng", PyDbgEngMethods);
-#endif
     if (m == NULL)
         goto error;
 
@@ -190,3 +189,20 @@ error:
 	return NULL;
 }
 
+#else
+
+PyMODINIT_FUNC PyInit_pydbgeng(void)
+{
+    PyObject *m;
+
+    m = PyModule_Create(&moduledef);
+    if (m == NULL)
+        return NULL;
+
+    //SpamError = PyErr_NewException("spam.error", NULL, NULL);
+    //Py_INCREF(SpamError);
+    //PyModule_AddObject(m, "error", SpamError);
+    return m;
+}
+
+#endif
