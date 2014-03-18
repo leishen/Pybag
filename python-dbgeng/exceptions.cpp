@@ -1,4 +1,4 @@
-#include "config.h"
+#include "compat.h"
 #include "exceptions.h"
 
 PyObject *

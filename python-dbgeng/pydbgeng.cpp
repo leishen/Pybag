@@ -4,7 +4,6 @@
  */
 
 #include "pydbgeng.h"
-#include "config.h"
 
 static PyObject *
 pydbgeng_DebugConnect(PyObject *self, PyObject *args)
