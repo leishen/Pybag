@@ -43,6 +43,7 @@ setup(
             include_dirs=[INC_DIR],
             library_dirs=[LIB_DIR],
             libraries=['dbgeng'],
+            extra_compile_args=['/wd 4273']
             )
     ],
     py_modules=['pybag.pywindbg', 'pybag.pefile'],

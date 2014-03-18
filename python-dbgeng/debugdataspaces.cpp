@@ -1,4 +1,4 @@
-#include "pydbgeng.h"
+#include "internal.h"
 
 // Usually from ddk
 #define STATUS_NO_MORE_ENTRIES 0x8000001aL

@@ -1,4 +1,4 @@
-#include "pydbgeng.h"
+#include "internal.h"
 #include "winstructs.h"
 
 static int 

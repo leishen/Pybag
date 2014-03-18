@@ -1,5 +1,5 @@
 #include "eventcallbacks.h"
-#include "pydbgeng.h"
+#include "internal.h"
 
 PyDebugEventCallbacks::PyDebugEventCallbacks()
 {

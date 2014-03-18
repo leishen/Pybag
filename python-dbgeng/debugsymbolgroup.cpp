@@ -1,4 +1,4 @@
-#include "pydbgeng.h"
+#include "internal.h"
 
 static PyObject *
 dbgsg_new(PyTypeObject *type, PyObject *args, PyObject *kwds)

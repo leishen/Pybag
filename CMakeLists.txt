@@ -17,11 +17,13 @@ else()
 endif()
 
 add_subdirectory(windbg-ext)
+add_subdirectory(python-dbgeng)
 
+# Now we also need to run setup.py to build the Python lib
 add_custom_command(
         OUTPUT pydbgeng.pyd
-        COMMAND py -3 setup.py build_ext
+        COMMAND py -3 setup.py build
         COMMENT Build the Python extension
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
-add_custom_target(pydbgeng ALL DEPENDS pydbgeng.pyd)
+add_custom_target(pydbgeng-pyd ALL DEPENDS pydbgeng.pyd)

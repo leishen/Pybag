@@ -1,4 +1,4 @@
-project(python-dbgeng)
+project(python-dbgeng-dll)
 
 set(TARGET_NAME pydbgeng)
 
@@ -26,10 +26,11 @@ list(APPEND source_files
                 outputcallbacks.cpp
                 outputcallbacks.h
                 pydbgeng.cpp
-                pydbgeng.h
+                internal.h
                 winstructs.cpp
                 winstructs.h
-				config.h
+				internal.h
+                compat.h
 )
         
 set(libs dbgeng.lib)

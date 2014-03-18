@@ -3,7 +3,8 @@
 #include "callbacks.h"
 #include <exception>
 
-/*
+#define CHECK(x, tothrow)	do {if(!(x)) {throw tothrow;}} while(0)
+
 using namespace std;
 
 class ImportException: public exception
@@ -13,20 +14,30 @@ class ImportException: public exception
 		return "Failed to import the Python module";
 	}
 };
-*/
 
 PybagCallbacks::PybagCallbacks(PDEBUG_CLIENT client, PCSTR modulename) : 
     m_pClient(client),
     m_moduleName(modulename)
 {
-	m_hModule = PyImport_ImportModule(modulename);
-	if( NULL == m_hModule ) 
-	{
-		//throw new ImportException();
-		throw 42;
-	}
-	// Now we need to find the class that derives from <SOMETHING>
+	PyObject *pybagmodule = NULL;
+	PyObject *argstr = NULL;
+		
+	// Build up a fromlist to include "onload" to execute
+	argstr = Py_BuildValue("s", "onload");
+
+	m_hModule = PyImport_ImportModuleEx(modulename, NULL, NULL, argstr);
+	CHECK(m_hModule != NULL, new ImportException());
+	
+	// Now we need to find the class that derives from PybagEventCallbacks
 	// and instantiate it, storing a reference
+	
+	// Get the class object for PybagEventCallbacks
+
+
+	// Iterate over all objects in modulename and check whether they derive 
+	// from PybagEventCallbacks
+
+	// Instantiate the first one that does...
 
     m_pClient->AddRef();
 }

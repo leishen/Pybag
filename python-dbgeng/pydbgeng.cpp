@@ -3,30 +3,23 @@
  * Missing functions
  */
 
-#include "pydbgeng.h"
+#include "internal.h"
 
-static PyObject *
-pydbgeng_DebugConnect(PyObject *self, PyObject *args)
+/* So that we can create the object from C */
+__declspec(dllexport) 
+PyObject * pydbgeng_FromExisting(IDebugClient5 *pClient)
 {
     HRESULT hr;
-    char *RemoteOptions = NULL;
-    IDebugClient5 *debugClient = NULL;
     PyDebugClientObject *cli = NULL;
-    PyDebugEventCallbacks *ev = NULL;
     PyObject *ret = NULL;
-
-    if (!PyArg_ParseTuple(args, "s:DebugConnect", &RemoteOptions))
-        return NULL;
-    if ((hr = DebugConnect(RemoteOptions, __uuidof(IDebugClient5), 
-                (PVOID *)&debugClient)) != S_OK)
-        return err_dbgeng(hr);
+    PyDebugEventCallbacks *ev = NULL;
 
     cli = (PyDebugClientObject *)PyObject_CallObject(
             (PyObject *)&PyDebugClientType, NULL);
     if (cli == NULL)
         Py_RETURN_NONE;
 
-    cli->client = debugClient;
+    cli->client = pClient;
 
     ev = new PyDebugEventCallbacks();
     if (ev == NULL) {
@@ -55,6 +48,33 @@ error:
     return ret;
 }
 
+
+
+static PyObject *
+pydbgeng_DebugConnect(PyObject *self, PyObject *args)
+{
+    HRESULT hr;
+    char *RemoteOptions = NULL;
+    IDebugClient5 *debugClient = NULL;
+    PyDebugClientObject *cli = NULL;
+    PyDebugEventCallbacks *ev = NULL;
+    PyObject *ret = NULL;
+
+    if (!PyArg_ParseTuple(args, "s:DebugConnect", &RemoteOptions))
+        return NULL;
+
+    if ((hr = DebugConnect(RemoteOptions, __uuidof(IDebugClient5), 
+                (PVOID *)&debugClient)) != S_OK)
+        return err_dbgeng(hr);
+
+    cli = (PyDebugClientObject *)PyObject_CallObject(
+            (PyObject *)&PyDebugClientType, NULL);
+    if (cli == NULL)
+        Py_RETURN_NONE;
+
+    return pydbgeng_FromExisting(debugClient);
+}
+
 static PyObject *
 pydbgeng_DebugCreate(PyObject *self)
 {
@@ -68,38 +88,7 @@ pydbgeng_DebugCreate(PyObject *self)
                     (PVOID *)&debugClient)) != S_OK) 
         return err_dbgeng(hr);
 
-    cli = (PyDebugClientObject *)PyObject_CallObject(
-            (PyObject *)&PyDebugClientType, NULL);
-    if (cli == NULL)
-        Py_RETURN_NONE;
-
-    cli->client = debugClient;
-
-    ev = new PyDebugEventCallbacks();
-    if (ev == NULL) {
-        PyErr_NoMemory();
-        goto error;
-    }
-
-    if ((hr = cli->client->SetEventCallbacks((IDebugEventCallbacks *)ev)) != S_OK) {
-        err_dbgeng(hr);
-        goto error;
-    }
-
-    ret = Py_BuildValue("N", cli);
-
-error:
-    if (ret == NULL) {
-        if (ev) ev->Release();
-        if (cli) { 
-            if (cli->client) {
-                cli->client->Release();
-                cli->client = NULL;
-            }
-            Py_DECREF(cli);
-        }
-    }
-    return ret;
+    return pydbgeng_FromExisting(debugClient);
 }
 
 static PyMethodDef  PyDbgEngMethods[] = {
@@ -152,20 +141,6 @@ static void AddTypes(PyObject *m)
     }
 }
 
-#ifdef IS_PY3K
-	static struct PyModuleDef moduledef = {
-		PyModuleDef_HEAD_INIT,
-		"pydbgeng",     /* m_name */
-		"Python interface to the Windbg engine",  /* m_doc */
-		-1,                  /* m_size */
-		PyDbgEngMethods,     /* m_methods */
-		NULL,                /* m_reload */
-		NULL,                /* m_traverse */
-		NULL,                /* m_clear */
-		NULL,                /* m_free */
-	};
-#endif
-
 #ifndef IS_PY3K
 
 PyMODINIT_FUNC initpydbgeng(void)
@@ -189,6 +164,17 @@ error:
 }
 
 #else
+static struct PyModuleDef moduledef = {
+	PyModuleDef_HEAD_INIT,
+	"pydbgeng",     /* m_name */
+	"Python interface to the Windbg engine",  /* m_doc */
+	-1,                  /* m_size */
+	PyDbgEngMethods,     /* m_methods */
+	NULL,                /* m_reload */
+	NULL,                /* m_traverse */
+	NULL,                /* m_clear */
+	NULL,                /* m_free */
+};
 
 PyMODINIT_FUNC PyInit_pydbgeng(void)
 {

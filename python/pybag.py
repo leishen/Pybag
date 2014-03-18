@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+from pydbgeng import PyDebugEventCallbacks
 
-class PybagEventCallbacks(object):
+class PybagEventCallbacks(PyDebugEventCallbacks):
     """Base implementation of the PybagEventCallbacks class for handling Windbg
     data.  The API closely mimics the IDebugEventCallbacks interface
     defined in the dbgeng API.  See MSDN for information about the
@@ -62,3 +63,7 @@ class PybagEventCallbacks(object):
     def UnloadModule(self, ImageBaseName, BaseOffset):
         raise NotImplementedError
         
+# Do something when the module imports
+def onload(client):
+    # TODO: Return a new object
+    pass
